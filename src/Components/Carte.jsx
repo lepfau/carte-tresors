@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Ligne from "./Ligne";
 
 function Carte() {
@@ -8,6 +8,7 @@ function Carte() {
     [2, 1],
     [0, 2],
   ]);
+
   const [tresor, setTresor] = useState([
     [0, 1, 1],
     [1, 1, 2],
@@ -24,23 +25,13 @@ function Carte() {
   const [orientation, setOrientation] = useState("S");
   const [positionX, setPositionX] = useState(1);
   const [positionY, setPositionY] = useState(0);
-  const [commande, setCommande] = useState("AAA");
+  const [commande, setCommande] = useState("GA");
 
-  let rows = [];
-  for (let i = 0; i < largeur; i++) {
-    rows.push(
-      <Ligne
-        key={i}
-        hauteur={hauteur}
-        x={i}
-        montagne={montagne}
-        tresor={tresor}
-        aventurier={aventurier}
-        orientation={orientation}
-        positionX={positionX}
-        positionY={positionY}
-      />
-    );
+  function moveForward() {
+    if (orientation === "O") setPositionX(positionX - 1);
+    if (orientation === "N") setPositionY(positionY - 1);
+    if (orientation === "S") setPositionY(positionY + 1);
+    if (orientation === "E") setPositionX(positionX + 1);
   }
 
   function turnLeft() {
@@ -83,39 +74,44 @@ function Carte() {
     }
   }
 
-  function moveForward() {
-    if (orientation === "O") {
-      setPositionX(positionX - 1);
-    } else if (orientation === "N") {
-      setPositionY(positionY - 1);
-    } else if (orientation === "S") {
-      setPositionY(positionY + 1);
-    } else if (orientation === "E") {
-      setPositionX(positionX + 1);
+  function giveCommand(input) {
+    if (input !== "A" && input !== "G" && input !== "D")
+      console.log("Commande invalide");
+    if (input === "A") {
+      moveForward();
+      console.log("forward");
+    } else if (input === "G") {
+      turnLeft();
+      console.log("left");
+    } else if (input === "D") {
+      turnRight();
+      console.log("right");
     }
   }
 
-  function giveCommand(input) {
-    for (let i = 0; i <= input.length - 1; i++) {
-      let commandLetter = input[i];
-      if (
-        commandLetter !== "A" &&
-        commandLetter !== "G" &&
-        commandLetter !== "D"
-      )
-        console.log("Commande invalide");
+  let listecommande = commande.split("");
 
-      if (commandLetter === "A") {
-        moveForward();
-        console.log("forward");
-      } else if (commandLetter === "G") {
-        turnLeft();
-        console.log("left");
-      } else if (commandLetter === "D") {
-        turnRight();
-        console.log("right");
-      }
-    }
+  useEffect(() => {
+    listecommande.forEach((commande) => {
+      giveCommand(commande);
+    });
+  }, []);
+
+  let colonnes = [];
+  for (let i = 0; i < largeur; i++) {
+    colonnes.push(
+      <Ligne
+        key={i}
+        hauteur={hauteur}
+        x={i}
+        montagne={montagne}
+        tresor={tresor}
+        aventurier={aventurier}
+        orientation={orientation}
+        positionX={positionX}
+        positionY={positionY}
+      />
+    );
   }
 
   return (
@@ -128,9 +124,9 @@ function Carte() {
       }}
     >
       <div style={{ display: "flex", marginBottom: "20px" }}>
-        <button onClick={() => giveCommand(commande)}>Start</button>
+        <button onClick={() => giveCommand()}>Start</button>
       </div>
-      <div style={{ display: "flex" }}>{rows}</div>
+      <div style={{ display: "flex" }}>{colonnes}</div>
     </div>
   );
 }

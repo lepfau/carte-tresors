@@ -6,8 +6,11 @@ function Aventurier(props) {
       style={{
         borderRadius: "100%",
         backgroundColor: "red",
-        height: "50px",
-        width: "50px",
+        height: "80px",
+        width: "80px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       {props.details.nom} ({props.orientation})

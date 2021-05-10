@@ -37,8 +37,6 @@ function Case(props) {
           <Aventurier
             key={props.aventurier.nom}
             details={props.aventurier}
-            montagne={props.montagne}
-            tresor={props.tresor}
             orientation={props.orientation}
           />
         </div>
