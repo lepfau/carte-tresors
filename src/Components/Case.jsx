@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import PionAventurier from "./PionAventurier";
 function Case(props) {
   const [style, setStyle] = useState("case-plaine");
-
   const [content, setContent] = useState(`${props.x}, ${props.y}`);
+  //CONTENT CORRESPONDANT A UNE CASE PLAINE / MONTAGNE / TRESOR / AVEC OU SANS AVENTURIER
 
+  //CONDITIONS AFFICHAGE DES CASES AU CHARGEMENT DU COMPONENT
   useEffect(() => {
     props.montagne.forEach((mont) => {
       if (mont[0] === props.x && mont[1] === props.y) {
@@ -31,6 +32,8 @@ function Case(props) {
           {props.x}, {props.y}
         </div>
       );
+
+    //PROBLEME CONDITIONS ENTRE TRESORS / MONTAGNE ET AVENTURIER EN SUSPEND POUR LE MOMENT
 
     // props.tresor.forEach((tres) => {
     //   if (tres[0] === props.x && tres[1] === props.y) {

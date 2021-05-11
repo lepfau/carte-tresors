@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Ligne from "./Ligne";
 
 function Carte(props) {
+  //PARAMETRES CARTE
   const dimensionsCarte = props.dimensions.split("-");
   const largeur = dimensionsCarte[1];
   const hauteur = dimensionsCarte[2];
@@ -14,6 +15,7 @@ function Carte(props) {
 
   const tresor = props.tresors;
 
+  //PARAMETRES AVENTURIER
   const aventurier = {
     joueur: "A",
     nom: "Indiana",
@@ -24,10 +26,12 @@ function Carte(props) {
 
   const commande = aventurier.commandes;
 
+  //STATE CHANGEANT DE L'AVENTURIER
   const [orientation, setOrientation] = useState("S");
   const [positionX, setPositionX] = useState(aventurier.position[0]);
   const [positionY, setPositionY] = useState(aventurier.position[1]);
 
+  //FONCTIONS MOUVEMENT AVENTURIER (AVANT, GAUCHE, DROITE)
   function moveForward() {
     if (orientation === "O") setPositionX(positionX - 1);
     if (orientation === "N") setPositionY(positionY - 1);
@@ -90,6 +94,7 @@ function Carte(props) {
     }
   }
 
+  //LANCER LES COMMANDES AU CHARGEMENT DU COMPONENT
   let listecommande = commande.split("");
 
   useEffect(() => {
@@ -98,6 +103,7 @@ function Carte(props) {
     });
   }, []);
 
+  //LOOP POUR GENERER LES COLONNES QUI CONSTITUENT LA CARTE
   let colonnes = [];
   for (let i = 0; i < largeur; i++) {
     colonnes.push(
@@ -125,6 +131,7 @@ function Carte(props) {
       }}
     >
       <div style={{ display: "flex", marginBottom: "20px" }}>
+        {/* GENERER MANUELLEMENT LES COMMANDES POUR TEST */}
         <button onClick={() => giveCommand()}>Start</button>
       </div>
       <div style={{ display: "flex" }}>{colonnes}</div>
