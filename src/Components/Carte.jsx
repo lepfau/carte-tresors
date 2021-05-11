@@ -7,15 +7,19 @@ function Carte(props) {
   const largeur = dimensionsCarte[1];
   const hauteur = dimensionsCarte[2];
 
+  //FONCTION A DEFINIR POUR RECUPERER INFO A PARTIR DE L'ARRAY DE STRING FOURNI AU DEPART
+  //["M - 1 - 1", "M - 2 - 2"]
   const donnesMontagnes = props.montagnes;
+
   const montagnes = [
     [1, 1],
     [2, 2],
   ];
 
+  //FONCTION A DEFINIR
   const tresor = props.tresors;
 
-  //PARAMETRES AVENTURIER
+  //PARAMETRES AVENTURIER EN OBJET POUR PLUS DE LISIBILITE
   const aventurier = {
     joueur: "A",
     nom: "Indiana",
