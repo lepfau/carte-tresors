@@ -2,16 +2,22 @@
   text-align: center;
 }
 
+body {
+  background-color: sandybrown;
+}
+
 .case-plaine {
   border: 1px solid black;
   width: 120px;
   height: 120px;
   background-image: url("https://preview.redd.it/eps8woq9nh9z.png?auto=webp&s=345c650bdbff7e66d877458d2dccce48a76ea04f");
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 1.5em;
+  font-size: 1.1em;
+  font-weight: 500;
 }
 
 .case-montagne {
@@ -24,4 +30,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.pion-aventurier {
+  border-radius: 100%;
+  background-color: firebrick;
+  height: 70px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-home {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+}
+
+.fiche-aventurier {
+  border-radius: 10px;
+  background-color: whitesmoke;
+  padding: 5px;
+  font-size: 0.9em;
 }

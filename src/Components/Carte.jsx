@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from "react";
 import Ligne from "./Ligne";
 
-function Carte() {
-  const [largeur, setLargeur] = useState(3);
-  const [hauteur, setHauteur] = useState(4);
-  const [montagne, setMontagne] = useState([
-    [2, 1],
-    [0, 2],
-  ]);
+function Carte(props) {
+  const dimensionsCarte = props.dimensions.split("-");
+  const largeur = dimensionsCarte[1];
+  const hauteur = dimensionsCarte[2];
 
-  const [tresor, setTresor] = useState([
-    [0, 1, 1],
-    [1, 1, 2],
-  ]);
+  const donnesMontagnes = props.montagnes;
+  const montagnes = [
+    [1, 1],
+    [2, 2],
+  ];
 
-  const [aventurier, setAventurier] = useState({
+  const tresor = props.tresors;
+
+  const aventurier = {
     joueur: "A",
     nom: "Indiana",
     position: [1, 0],
     orientation: "S",
     commandes: "AADADA",
-  });
+  };
+
+  const commande = aventurier.commandes;
 
   const [orientation, setOrientation] = useState("S");
-  const [positionX, setPositionX] = useState(1);
-  const [positionY, setPositionY] = useState(0);
-  const [commande, setCommande] = useState("GA");
+  const [positionX, setPositionX] = useState(aventurier.position[0]);
+  const [positionY, setPositionY] = useState(aventurier.position[1]);
 
   function moveForward() {
     if (orientation === "O") setPositionX(positionX - 1);
@@ -104,7 +105,7 @@ function Carte() {
         key={i}
         hauteur={hauteur}
         x={i}
-        montagne={montagne}
+        montagne={montagnes}
         tresor={tresor}
         aventurier={aventurier}
         orientation={orientation}
