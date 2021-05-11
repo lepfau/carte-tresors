@@ -44,15 +44,20 @@ function Carte(props) {
         if (
           (positionX - 1 !== montagnes[0][0] ||
             positionY !== montagnes[0][1]) &&
-          (positionX - 1 !== montagnes[1][0] || positionY !== montagnes[1][1])
+          (positionX - 1 !== montagnes[1][0] ||
+            positionY !== montagnes[1][1]) &&
+          positionX - 1 >= 0
         )
           setPositionX(positionX - 1);
+
         break;
       case "E":
         if (
           (positionX + 1 !== montagnes[0][0] ||
             positionY !== montagnes[0][1]) &&
-          (positionX + 1 !== montagnes[1][0] || positionY !== montagnes[1][1])
+          (positionX + 1 !== montagnes[1][0] ||
+            positionY !== montagnes[1][1]) &&
+          positionX + 1 < largeur
         )
           setPositionX(positionX + 1);
         break;
@@ -60,7 +65,9 @@ function Carte(props) {
         if (
           (positionX !== montagnes[0][0] ||
             positionY - 1 !== montagnes[0][1]) &&
-          (positionX !== montagnes[1][0] || positionY - 1 !== montagnes[1][1])
+          (positionX !== montagnes[1][0] ||
+            positionY - 1 !== montagnes[1][1]) &&
+          positionY - 1 >= 0
         )
           setPositionY(positionY - 1);
         break;
@@ -68,7 +75,9 @@ function Carte(props) {
         if (
           (positionX !== montagnes[0][0] ||
             positionY + 1 !== montagnes[0][1]) &&
-          (positionX !== montagnes[1][0] || positionY + 1 !== montagnes[1][1])
+          (positionX !== montagnes[1][0] ||
+            positionY + 1 !== montagnes[1][1]) &&
+          positionY + 1 < hauteur
         )
           setPositionY(positionY + 1);
         break;
