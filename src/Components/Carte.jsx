@@ -41,25 +41,31 @@ function Carte(props) {
   function moveForward() {
     if (
       orientation === "E" &&
-      ((positionX + 1 !== montagnes[0][0] && positionY !== montagnes[0][1]) ||
-        (positionX + 1 !== montagnes[1][0] && positionY !== montagnes[1][1]))
+      [positionX + 1, positionY] !== montagnes[0] &&
+      [positionX + 1, positionY] !== montagnes[1]
     )
       setPositionX(positionX + 1);
     else if (
       orientation === "O" &&
-      (positionX - 1 !== montagnes[0][0] || positionX + 1 !== montagnes[1][0])
+      [positionX - 1, positionY] !== montagnes[0] &&
+      [positionX - 1, positionY] !== montagnes[1]
     )
       setPositionX(positionX - 1);
     else if (
       orientation === "N" &&
-      (positionY - 1 !== montagnes[0][1] || positionY - 1 !== montagnes[1][1])
+      [positionX, positionY - 1] !== montagnes[0] &&
+      [positionX, positionY - 1] !== montagnes[1]
     )
       setPositionY(positionY - 1);
     else if (
       orientation === "S" &&
-      (positionY + 1 !== montagnes[0][1] || positionY + 1 !== montagnes[1][1])
+      [positionX, positionY + 1] !== montagnes[0] &&
+      [positionX, positionY + 1] !== montagnes[1]
     )
       setPositionY(positionY + 1);
+    else {
+      console.log("Vous ne pouvez pas franchir les montagnes");
+    }
   }
 
   //CHANGEMENT DIRECTION  GAUCHE TEST MANUEL OK

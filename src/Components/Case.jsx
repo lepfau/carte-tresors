@@ -38,6 +38,8 @@ function Case(props) {
           {props.x}, {props.y}
         </div>
       );
+
+    //PROBLEME CONDITIONS ENTRE TRESORS / MONTAGNE ET AVENTURIER EN SUSPEND POUR LE MOMENT
   }, [
     props.orientation,
     props.aventurier,
