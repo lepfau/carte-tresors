@@ -10,8 +10,8 @@ function Carte(props) {
   //FONCTION A DEFINIR POUR RECUPERER INFO A PARTIR DE L'ARRAY DE STRING FOURNI AU DEPART
   //["M - 1 - 1", "M - 2 - 2"]
   const montagnes = [
-    [1, 1],
-    [2, 2],
+    [2, 0],
+    [0, 3],
   ];
 
   //FONCTION A DEFINIR
@@ -40,30 +40,26 @@ function Carte(props) {
   //FONCTIONS MOUVEMENT AVENTURIER (AVANT, GAUCHE, DROITE)
   function moveForward() {
     if (
-      (positionX === montagnes[0][0] && positionY === montagnes[0][1]) ||
-      (positionX === montagnes[1][0] && positionY === montagnes[1][1])
-    ) {
-      setPositionX(logVoyage[0]);
-      setPositionY(logVoyage[1]);
-      console.log("Vous ne pouvez pas franchir les montagnes");
-    } else if (
-      positionX < 0 ||
-      positionX > largeur ||
-      positionY < 0 ||
-      positionY > hauteur
-    ) {
-      console.log("L'aventurier ne peut pas sortir de la zone de la carte");
-    } else {
-      if (orientation === "O") setPositionX(positionX - 1);
-      logVoyage = [positionX, positionY];
-      if (orientation === "N") setPositionY(positionY - 1);
-      logVoyage = [positionX, positionY];
-      if (orientation === "S") setPositionY(positionY + 1);
-      logVoyage = [positionX, positionY];
-      console.log(logVoyage);
-      if (orientation === "E") setPositionX(positionX + 1);
-      logVoyage = [positionX, positionY];
-    }
+      orientation === "E" &&
+      ((positionX + 1 !== montagnes[0][0] && positionY !== montagnes[0][1]) ||
+        (positionX + 1 !== montagnes[1][0] && positionY !== montagnes[1][1]))
+    )
+      setPositionX(positionX + 1);
+    else if (
+      orientation === "O" &&
+      (positionX - 1 !== montagnes[0][0] || positionX + 1 !== montagnes[1][0])
+    )
+      setPositionX(positionX - 1);
+    else if (
+      orientation === "N" &&
+      (positionY - 1 !== montagnes[0][1] || positionY - 1 !== montagnes[1][1])
+    )
+      setPositionY(positionY - 1);
+    else if (
+      orientation === "S" &&
+      (positionY + 1 !== montagnes[0][1] || positionY + 1 !== montagnes[1][1])
+    )
+      setPositionY(positionY + 1);
   }
 
   //CHANGEMENT DIRECTION  GAUCHE TEST MANUEL OK
