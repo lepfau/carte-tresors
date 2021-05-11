@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Ligne from "./Ligne";
+import Colonne from "./Colonne";
 
 function Carte(props) {
   //PARAMETRES CARTE
@@ -9,8 +9,6 @@ function Carte(props) {
 
   //FONCTION A DEFINIR POUR RECUPERER INFO A PARTIR DE L'ARRAY DE STRING FOURNI AU DEPART
   //["M - 1 - 1", "M - 2 - 2"]
-  const donnesMontagnes = props.montagnes;
-
   const montagnes = [
     [1, 1],
     [2, 2],
@@ -20,12 +18,13 @@ function Carte(props) {
   const tresor = props.tresors;
 
   //PARAMETRES AVENTURIER EN OBJET POUR PLUS DE LISIBILITE
+
   const aventurier = {
     joueur: "A",
     nom: "Indiana",
     position: [1, 0],
     orientation: "S",
-    commandes: "AADADA",
+    commandes: "D",
   };
 
   const commande = aventurier.commandes;
@@ -43,6 +42,7 @@ function Carte(props) {
     if (orientation === "E") setPositionX(positionX + 1);
   }
 
+  //CHANGEMENT DIRECTION  GAUCHE TEST MANUEL OK
   function turnLeft() {
     switch (orientation) {
       case "N":
@@ -63,6 +63,7 @@ function Carte(props) {
     }
   }
 
+  //CHANGEMENT DIRECTION DROITE TEST MANUEL OK
   function turnRight() {
     switch (orientation) {
       case "N":
@@ -83,6 +84,7 @@ function Carte(props) {
     }
   }
 
+  //PROBLEME COMMANDE AVANCER ENCHAINEMENT DES LETTRES
   function giveCommand(input) {
     if (input !== "A" && input !== "G" && input !== "D")
       console.log("Commande invalide");
@@ -98,7 +100,7 @@ function Carte(props) {
     }
   }
 
-  //LANCER LES COMMANDES AU CHARGEMENT DU COMPONENT
+  //LANCER LES COMMANDES AU CHARGEMENT DU COMPONENT ?
   let listecommande = commande.split("");
 
   useEffect(() => {
@@ -107,11 +109,11 @@ function Carte(props) {
     });
   }, []);
 
-  //LOOP POUR GENERER LES COLONNES QUI CONSTITUENT LA CARTE
+  //LOOP POUR GENERER LES COLONNES EN FONCTION DE LA LARGEUR
   let colonnes = [];
   for (let i = 0; i < largeur; i++) {
     colonnes.push(
-      <Ligne
+      <Colonne
         key={i}
         hauteur={hauteur}
         x={i}
@@ -137,6 +139,9 @@ function Carte(props) {
       <div style={{ display: "flex", marginBottom: "20px" }}>
         {/* GENERER MANUELLEMENT LES COMMANDES POUR TEST */}
         <button onClick={() => giveCommand()}>Start</button>
+        <button onClick={() => turnLeft()}>Gauche</button>
+        <button onClick={() => turnRight()}>Droite</button>
+        <button onClick={() => moveForward()}>Avancer</button>
       </div>
       <div style={{ display: "flex" }}>{colonnes}</div>
     </div>

@@ -1,7 +1,8 @@
 import React from "react";
 import Case from "./Case";
 
-function Ligne(props) {
+function Colonne(props) {
+  //LOOP POUR DEFINIR HAUTEUR DES COLONENS EN FONCTION DE LA HAUTEUR PASSEE
   let height = [];
 
   for (let i = 0; i < props.hauteur; i++) {
@@ -23,4 +24,4 @@ function Ligne(props) {
   return <div>{height}</div>;
 }
 
-export default Ligne;
+export default Colonne;

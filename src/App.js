@@ -7,10 +7,7 @@ import ListeAventurier from "./Components/ListeAventurier";
 const carte = "C - 3 - 4";
 const montagnes = ["M - 1 - 1", "M - 2 - 2"];
 const tresors = ["T - 0 - 3 - 2", "T - 1 - 3 - 1"];
-const aventuriers = [
-  "A - Indiana - 1 - 1 - S - AADADA",
-  "B - Lara - 1 - 2 - O - AAGGD",
-];
+const aventuriers = ["A - Indiana - 1 - 1 - S - AADADA"];
 
 function App() {
   return (
