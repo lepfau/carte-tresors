@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Colonne from "./Colonne";
 
 function Carte(props) {
@@ -24,7 +24,7 @@ function Carte(props) {
     nom: "Indiana",
     position: [1, 0],
     orientation: "S",
-    commandes: "D",
+    commandes: "AGD",
   };
 
   const commande = aventurier.commandes;
@@ -33,9 +33,16 @@ function Carte(props) {
   const [orientation, setOrientation] = useState("S");
   const [positionX, setPositionX] = useState(aventurier.position[0]);
   const [positionY, setPositionY] = useState(aventurier.position[1]);
+  const [input, setInput] = useState("");
 
-  //LOG DU TRAJET POUR RECUPERER POSITION AVANT CHUTE / OBSTACLE
-  let logVoyage = [];
+  //CONTROLER EXECUTION DES COMMANDES
+  // let listecommande = commande.split("");
+  // listecommande.forEach((commande) => {
+  //   setInterval(() => {
+  //     setInput(commande);
+  //   }, 1000);
+  //   clearInterval();
+  // });
 
   //FONCTIONS MOUVEMENT AVENTURIER (AVANT, GAUCHE, DROITE)
   function moveForward() {
@@ -130,29 +137,27 @@ function Carte(props) {
   }
 
   //PROBLEME COMMANDE AVANCER ENCHAINEMENT DES LETTRES
+
   function giveCommand(input) {
-    if (input !== "A" && input !== "G" && input !== "D")
-      console.log("Commande invalide");
-    if (input === "A") {
-      moveForward();
-      console.log("forward");
-    } else if (input === "G") {
-      turnLeft();
-      console.log("left");
-    } else if (input === "D") {
-      turnRight();
-      console.log("right");
+    for (let i = 0; i < input.length - 1; i++) {
+      let order = input[i];
+      switch (order) {
+        case "A":
+          moveForward();
+          break;
+        case "G":
+          turnLeft();
+          break;
+        case "D":
+          turnRight();
+          break;
+        default:
+          console.log("invalid input");
+      }
     }
   }
 
   //LANCER LES COMMANDES AU CHARGEMENT DU COMPONENT ?
-  let listecommande = commande.split("");
-
-  useEffect(() => {
-    listecommande.forEach((commande) => {
-      giveCommand(commande);
-    });
-  }, []);
 
   //LOOP POUR GENERER LES COLONNES EN FONCTION DE LA LARGEUR
   let colonnes = [];
@@ -183,7 +188,7 @@ function Carte(props) {
     >
       <div style={{ display: "flex", marginBottom: "20px" }}>
         {/* GENERER MANUELLEMENT LES COMMANDES POUR TEST */}
-        <button onClick={() => giveCommand()}>Start</button>
+        <button onClick={() => giveCommand(commande)}>Start</button>
         <button onClick={() => turnLeft()}>Gauche</button>
         <button onClick={() => turnRight()}>Droite</button>
         <button onClick={() => moveForward()}>Avancer</button>
