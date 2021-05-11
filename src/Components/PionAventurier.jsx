@@ -1,6 +1,6 @@
 import React from "react";
 
-function Aventurier(props) {
+function PionAventurier(props) {
   return (
     <div
       style={{
@@ -18,4 +18,4 @@ function Aventurier(props) {
   );
 }
 
-export default Aventurier;
+export default PionAventurier;

@@ -1,30 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Aventurier from "./Aventurier";
+import PionAventurier from "./PionAventurier";
 function Case(props) {
-  const [style, setStyle] = useState({
-    border: "1px solid black",
-    width: "120px",
-    height: "120px",
-    backgroundColor: "green",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  });
+  const [style, setStyle] = useState("case-plaine");
 
   const [content, setContent] = useState(`${props.x}, ${props.y}`);
 
   useEffect(() => {
     props.montagne.forEach((mont) => {
       if (mont[0] === props.x && mont[1] === props.y) {
-        setStyle({
-          border: "1px solid black",
-          width: "120px",
-          height: "120px",
-          backgroundColor: "grey",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        });
+        setStyle("case-montagne");
       }
     });
 
@@ -34,7 +18,7 @@ function Case(props) {
           <div>
             {props.x}, {props.y}
           </div>
-          <Aventurier
+          <PionAventurier
             key={props.aventurier.nom}
             details={props.aventurier}
             orientation={props.orientation}
@@ -66,7 +50,7 @@ function Case(props) {
 
   return (
     <div>
-      <div style={style}>{content}</div>
+      <div className={style}>{content}</div>
     </div>
   );
 }
