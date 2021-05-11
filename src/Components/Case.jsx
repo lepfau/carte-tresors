@@ -13,6 +13,12 @@ function Case(props) {
       }
     });
 
+    props.tresor.forEach((tres) => {
+      if (tres[0] === props.x && tres[1] === props.y) {
+        setContent(`${props.x}, ${props.y} (T(${tres[2]}))`);
+      }
+    });
+
     if (props.positionX === props.x && props.positionY === props.y) {
       setContent(
         <div>
@@ -32,14 +38,6 @@ function Case(props) {
           {props.x}, {props.y}
         </div>
       );
-
-    //PROBLEME CONDITIONS ENTRE TRESORS / MONTAGNE ET AVENTURIER EN SUSPEND POUR LE MOMENT
-
-    // props.tresor.forEach((tres) => {
-    //   if (tres[0] === props.x && tres[1] === props.y) {
-    //     setContent(`${props.x}, ${props.y} (T(${tres[2]}))`);
-    //   }
-    // });
   }, [
     props.orientation,
     props.aventurier,

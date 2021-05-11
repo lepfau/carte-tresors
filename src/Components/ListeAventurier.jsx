@@ -10,7 +10,7 @@ function ListeAventurier(props) {
     const parcoursAventurier = valeursAventurier[5];
 
     return (
-      <div className="fiche-aventurier">
+      <div className="fiche-aventurier" key={index}>
         <h3>Aventurier {index + 1}</h3>
         <p>Nom: {nomAventurier}</p>
         <p>Lettre : {lettreAventurier}</p>

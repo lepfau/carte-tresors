@@ -34,12 +34,36 @@ function Carte(props) {
   const [positionX, setPositionX] = useState(aventurier.position[0]);
   const [positionY, setPositionY] = useState(aventurier.position[1]);
 
+  //LOG DU TRAJET POUR RECUPERER POSITION AVANT CHUTE / OBSTACLE
+  let logVoyage = [];
+
   //FONCTIONS MOUVEMENT AVENTURIER (AVANT, GAUCHE, DROITE)
   function moveForward() {
-    if (orientation === "O") setPositionX(positionX - 1);
-    if (orientation === "N") setPositionY(positionY - 1);
-    if (orientation === "S") setPositionY(positionY + 1);
-    if (orientation === "E") setPositionX(positionX + 1);
+    if (
+      (positionX === montagnes[0][0] && positionY === montagnes[0][1]) ||
+      (positionX === montagnes[1][0] && positionY === montagnes[1][1])
+    ) {
+      setPositionX(logVoyage[0]);
+      setPositionY(logVoyage[1]);
+      console.log("Vous ne pouvez pas franchir les montagnes");
+    } else if (
+      positionX < 0 ||
+      positionX > largeur ||
+      positionY < 0 ||
+      positionY > hauteur
+    ) {
+      console.log("L'aventurier ne peut pas sortir de la zone de la carte");
+    } else {
+      if (orientation === "O") setPositionX(positionX - 1);
+      logVoyage = [positionX, positionY];
+      if (orientation === "N") setPositionY(positionY - 1);
+      logVoyage = [positionX, positionY];
+      if (orientation === "S") setPositionY(positionY + 1);
+      logVoyage = [positionX, positionY];
+      console.log(logVoyage);
+      if (orientation === "E") setPositionX(positionX + 1);
+      logVoyage = [positionX, positionY];
+    }
   }
 
   //CHANGEMENT DIRECTION  GAUCHE TEST MANUEL OK
@@ -47,6 +71,7 @@ function Carte(props) {
     switch (orientation) {
       case "N":
         setOrientation("O");
+
         break;
       case "O":
         setOrientation("S");

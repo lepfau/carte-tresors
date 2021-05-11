@@ -3,7 +3,7 @@ import React from "react";
 function PionAventurier(props) {
   return (
     <div className="pion-aventurier">
-      {props.details.nom} ({props.orientation})
+      {props.details.joueur} ({props.orientation})
     </div>
   );
 }
