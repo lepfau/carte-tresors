@@ -39,32 +39,41 @@ function Carte(props) {
 
   //FONCTIONS MOUVEMENT AVENTURIER (AVANT, GAUCHE, DROITE)
   function moveForward() {
-    if (
-      orientation === "E" &&
-      [positionX + 1, positionY] !== montagnes[0] &&
-      [positionX + 1, positionY] !== montagnes[1]
-    )
-      setPositionX(positionX + 1);
-    else if (
-      orientation === "O" &&
-      [positionX - 1, positionY] !== montagnes[0] &&
-      [positionX - 1, positionY] !== montagnes[1]
-    )
-      setPositionX(positionX - 1);
-    else if (
-      orientation === "N" &&
-      [positionX, positionY - 1] !== montagnes[0] &&
-      [positionX, positionY - 1] !== montagnes[1]
-    )
-      setPositionY(positionY - 1);
-    else if (
-      orientation === "S" &&
-      [positionX, positionY + 1] !== montagnes[0] &&
-      [positionX, positionY + 1] !== montagnes[1]
-    )
-      setPositionY(positionY + 1);
-    else {
-      console.log("Vous ne pouvez pas franchir les montagnes");
+    switch (orientation) {
+      case "O":
+        if (
+          (positionX - 1 !== montagnes[0][0] ||
+            positionY !== montagnes[0][1]) &&
+          (positionX - 1 !== montagnes[1][0] || positionY !== montagnes[1][1])
+        )
+          setPositionX(positionX - 1);
+        break;
+      case "E":
+        if (
+          (positionX + 1 !== montagnes[0][0] ||
+            positionY !== montagnes[0][1]) &&
+          (positionX + 1 !== montagnes[1][0] || positionY !== montagnes[1][1])
+        )
+          setPositionX(positionX + 1);
+        break;
+      case "N":
+        if (
+          (positionX !== montagnes[0][0] ||
+            positionY - 1 !== montagnes[0][1]) &&
+          (positionX !== montagnes[1][0] || positionY - 1 !== montagnes[1][1])
+        )
+          setPositionY(positionY - 1);
+        break;
+      case "S":
+        if (
+          (positionX !== montagnes[0][0] ||
+            positionY + 1 !== montagnes[0][1]) &&
+          (positionX !== montagnes[1][0] || positionY + 1 !== montagnes[1][1])
+        )
+          setPositionY(positionY + 1);
+        break;
+      default:
+        console.log("default");
     }
   }
 
